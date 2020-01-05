@@ -9,5 +9,4 @@ From:
 
 Into(At ratio setting 7):
 
-![Yr apothing me?](https://raw.githubusercontent.com/vizmiz/BasicTools-ImgToAscii/master/Images/WALK.jpg)
-
+![Yr apothing me?](https://raw.githubusercontent.com/vizmiz/BasicTools-ImgToAscii/master/AsciiArt/WALKASCII.png)
