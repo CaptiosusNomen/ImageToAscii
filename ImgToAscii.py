@@ -1,31 +1,42 @@
 from PIL import Image
 import os
+class I2A:
+    def __init__(self):
+        self.Characters = ['·','.','*','$','#']
+        self.Output= ''
+        self.FilePath = os.path.dirname(os.path.abspath(__file__))
+        self.ImageChoice=''
+        self.Options()
 
-Characters = ['·','.','*','$','#']
-Output= ''
-FilePath = os.path.dirname(os.path.abspath(__file__))
-for files in os.listdir('{}/Images'.format(FilePath)):
-    print(files)
+    def Options(self):
+        for files in os.listdir('{}/Images'.format(self.FilePath)):
+            print(files)
+        self.ImageChoice=input("\nWhat is the name of the image you want me to convert? Mind you, I'm picky and only like .jpg\n")
+        self.RawImage = Image.open('{0}/Images/{1}.jpg'.format(self.FilePath,self.ImageChoice))
+        self.RatioRange()
 
-Choose=input('\nWhat is the name of the image you want me to convert? Please include the file extenton\n ')
-Ratio=input('What ratio do you want to ascii img to be made at?\n1 for no change.     2 for half size.\n3 for one third.     4 for one forth etc...\n')
-Ratio=int(Ratio)
+    def RatioRange(self):
+        for Ratio in range(10):
+            if Ratio is not 0:
+                self.ProcessImage(Ratio)
 
-
-ImageUsed = Image.open('{0}/Images/{1}'.format(FilePath,Choose))
-ImageUsed = ImageUsed.resize((int(ImageUsed.width//Ratio),int(ImageUsed.height//Ratio)))
-
-for y in range(ImageUsed.height):
-    for x in range(ImageUsed.width):
-     #Max750//150 = 0 through 5, the amout of Characters used.
-        brightness = sum(ImageUsed.getpixel((x, y)))//150
-        brightness-=1
-        if brightness<=0:
-            brightness=0
-        Output += Characters[brightness]
-    Output += '\n'
-
-
-openfile=open("{0}/AsciiArt/{1}:{2}.txt".format(FilePath,Choose,Ratio),"w") 
-print(Output,file=openfile)
-openfile.close()
+    def ProcessImage(self,Ratio):
+        ResizedImage = self.RawImage.resize((int(self.RawImage.width//Ratio),int(self.RawImage.height//Ratio)))
+        for y in range(ResizedImage.height):
+            for x in range(ResizedImage.width):
+             #Max750//150 = 0 through 5, the amout of Characters used.
+                Brightness = sum(ResizedImage.getpixel((x, y)))//150
+                Brightness-=1
+                if Brightness<=0:
+                    Brightness=0
+                self.Output += self.Characters[Brightness]
+            self.Output += '\n'
+        self.MRCFile(Ratio)
+        self.Output=''
+    def MRCFile(self,Ratio):
+        openfile=open("{0}/AsciiArt/{1}:{2}.txt".format(self.FilePath,self.ImageChoice,Ratio),"w") 
+        print(self.Output,file=openfile)
+        openfile.close()
+        print('\n\nRatio Level:{}'.format(str(Ratio)))
+        print(self.Output)
+I2A()
