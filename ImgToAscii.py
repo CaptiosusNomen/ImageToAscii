@@ -2,7 +2,7 @@ from PIL import Image
 import os
 class I2A:
     def __init__(self):    
-        self.Characters = [' ','.',',','~','*','+','=','%','$','&','#']
+        self.Characters = [' ','.',',','~','+','*','=','%','$','&','#']
         self.Output= ''
         self.FilePath = os.path.dirname(os.path.abspath(__file__))
 
