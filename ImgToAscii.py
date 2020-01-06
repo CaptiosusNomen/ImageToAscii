@@ -1,17 +1,20 @@
 from PIL import Image
 import os
 class I2A:
-    def __init__(self):
-        self.Characters = [' ','.','*','$','#']
+    def __init__(self):    
+        self.Characters = [' ','.',',','~','*','+','=','%','$','&','#']
         self.Output= ''
         self.FilePath = os.path.dirname(os.path.abspath(__file__))
-        self.ImageChoice=''
+
         self.Options()
 
     def Options(self):
         for files in os.listdir('{}/Images'.format(self.FilePath)):
             print(files)
-        self.ImageChoice=input("\nWhat is the name of the image you want me to convert? Mind you, I'm picky and only like .jpg\n")
+        self.ImageChoice=input("\nWhat is the name of the image you want me to convert?\n Mind you, I'm picky and only like .jpg\n")
+        ModeSelect=input('1 for LightMode(Dark Text on a light background)\n2 for Darkmode(Light text on a dark background)\n')
+        if ModeSelect is '1':
+            self.Characters.reverse()
         self.RawImage = Image.open('{0}/Images/{1}.jpg'.format(self.FilePath,self.ImageChoice))
         self.RatioRange()
 
@@ -24,8 +27,8 @@ class I2A:
         ResizedImage = self.RawImage.resize((int(self.RawImage.width//Ratio),int(self.RawImage.height//Ratio)))
         for y in range(ResizedImage.height):
             for x in range(ResizedImage.width):
-             #Max750//150 = 0 through 5, the amout of Characters used.
-                Brightness = sum(ResizedImage.getpixel((x, y)))//150
+             #Max750//75 = 0 through 10, the amout of Characters used.
+                Brightness = sum(ResizedImage.getpixel((x, y)))//68
                 Brightness-=1
                 if Brightness<=0:
                     Brightness=0
