@@ -1,5 +1,6 @@
 # BasicTools-ImgToAscii
 .jpg input, .txt output
+
 Hierarchy layout:
  	ImgToAscii.py expects to be above folders AsciiArt and Images.  
   Grabbing .jpgs from Images and placing .txt files into AsciiArt 
