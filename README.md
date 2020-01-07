@@ -4,14 +4,12 @@ This script can be used in two ways. Run as-is, or imported into another file.
 The output either way is simply 20 strings of ASCII art. the first is a 1:1 of the source image, and the 20th is 1/20th of the soure.
 
 > Run as-is
->> When run it will ask the user for a .jpg image and a directory to save the output text files in.
+>> When run it will ask the user for a .jpg image and a directory to save the output text files into.
 
 
 > imported into another file
-
 >> When imported and given an jpg equivalent and a Light/Dark Mode setting it will output a list containing 20 strings
-
-> Example Code:
+>>> Example Code:
 ```py
 import ImgToAscii as I2A
 import tkinter as tk
