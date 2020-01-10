@@ -25,10 +25,10 @@ def GetAsciiList():
                         title='Select Image',
                         filetypes=(("jpeg files","*.jpg"),("all files","*.*")))
     
-    DarkList=I2A.ImgToAscii(Image.open(ImageChoice),Mode='Dark')
+    DarkList=I2A.ImgToAscii(Image.open(ImageChoice),Mode='Dark').FullList()
     for each in DarkList:
         print(each)
-    LightList=I2A.ImgToAscii(Image.open(ImageChoice),Mode='Light')
+    LightList=I2A.ImgToAscii(Image.open(ImageChoice),Mode='Light').FullList()
     for each in LightList:
         print(each)
 
