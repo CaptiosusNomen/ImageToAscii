@@ -8,7 +8,7 @@ The output either way is simply 20 strings of ASCII art. the first is a 1:1 of t
 
 
 > imported into another file
->> When imported and given an jpg equivalent and a Light/Dark Mode setting it will output a list containing 20 strings
+>> When imported and given a jpg equivalent and a Light/Dark Mode setting it will output a list containing 20 strings
 >>> Example Code:
 ```py
 import ImgToAscii as I2A
