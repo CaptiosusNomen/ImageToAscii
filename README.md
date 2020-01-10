@@ -11,7 +11,7 @@ The output either way is simply 20 strings of ASCII art. the first is a 1:1 of t
 >> When imported and given a jpg equivalent and a Light/Dark Mode setting it will output a list containing 20 strings
 >>> Example Code:
 ```py
-import ImgToAscii as I2A
+import JpgToAscii as J2A
 import tkinter as tk
 from tkinter import filedialog
 from PIL import Image
@@ -25,10 +25,10 @@ def GetAsciiList():
                         title='Select Image',
                         filetypes=(("jpeg files","*.jpg"),("all files","*.*")))
     
-    DarkList=I2A.JpgToAscii(Image.open(ImageChoice),Mode='Dark').FullList()
+    DarkList=J2A.JpgToAscii(Image.open(ImageChoice),Mode='Dark').FullList()
     for each in DarkList:
         print(each)
-    LightList=I2A.JpgToAscii(Image.open(ImageChoice),Mode='Light').FullList()
+    LightList=J2A.JpgToAscii(Image.open(ImageChoice),Mode='Light').FullList()
     for each in LightList:
         print(each)
 
