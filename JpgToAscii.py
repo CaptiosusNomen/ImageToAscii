@@ -1,7 +1,7 @@
 from PIL import Image
 import os
-class ImgToAscii:
-    def __init__(self,Image,Mode):    
+class JpgToAscii:
+    def __init__(self,Image='',Mode=''):    
         self.Characters = [' ','.',',','~','+','*','=','%','$','&','#']
         self.Output=''
         self.FilePath= os.path.dirname(os.path.abspath(__file__))
@@ -11,9 +11,7 @@ class ImgToAscii:
         self.Imported=True
         if self.ModeSelect.lower() is 'light':
             self.Characters.reverse()
-        if __name__ is not "__main__": 
-            self.Ratio()
-                       
+
         #for when it's run by itself. 
     def StandAloneOptions(self):
         self.Imported=False
@@ -41,6 +39,8 @@ class ImgToAscii:
         self.RawImage = Image.open(self.ImageChoice)
         self.Ratio()
 
+    def FullList(self):
+        self.Ratio()
 
     def Ratio(self):
         if self.Imported is True:
@@ -87,8 +87,8 @@ class ImgToAscii:
 
     def __iter__(self):
         return iter(self.Payload)
-if __name__ is "__main__": 
-    Run=ImgToAscii(Image='',Mode='')
-    Run.StandAloneOptions()
 
-   
+if __name__ == "__main__":
+    JpgToAscii().StandAloneOptions()
+else:
+    pass
