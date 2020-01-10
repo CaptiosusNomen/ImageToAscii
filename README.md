@@ -1,4 +1,4 @@
-# BasicTools-ImgToAscii
+# BasicTools- JpgToAscii
 .jpg input, .txt output
 This script can be used in two ways. Run as-is, or imported into another file.
 The output either way is simply 20 strings of ASCII art. the first is a 1:1 of the source image, and the 20th is 1/20th of the soure.
@@ -25,10 +25,10 @@ def GetAsciiList():
                         title='Select Image',
                         filetypes=(("jpeg files","*.jpg"),("all files","*.*")))
     
-    DarkList=I2A.ImgToAscii(Image.open(ImageChoice),Mode='Dark').FullList()
+    DarkList=I2A.JpgToAscii(Image.open(ImageChoice),Mode='Dark').FullList()
     for each in DarkList:
         print(each)
-    LightList=I2A.ImgToAscii(Image.open(ImageChoice),Mode='Light').FullList()
+    LightList=I2A.JpgToAscii(Image.open(ImageChoice),Mode='Light').FullList()
     for each in LightList:
         print(each)
 
