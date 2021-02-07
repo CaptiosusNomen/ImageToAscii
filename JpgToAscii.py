@@ -1,5 +1,7 @@
 from PIL import Image
 import os
+import sys
+
 class JpgToAscii:
     def __init__(self,Image='',Mode=''):    
         self.Characters = [' ','.',',','~','+','*','=','%','$','&','#']
@@ -19,23 +21,22 @@ class JpgToAscii:
         from tkinter import filedialog
         Window = tk.Tk()
         Window.withdraw()
-        print('Please press select a .jpg image.')
+        input('Please press select a .jpg image.')
         self.ImageChoice= filedialog.askopenfilename(
-                          initialdir='/Desktop',
-                          title='Select Image',
-                          filetypes=(("jpeg files","*.jpg"),("all files","*.*")))
-        self.NameChoice=input('Saved under what name?')
-        print('Please select a directory to save things to.')
+                                          initialdir=self.FilePath,
+                                          title='Select Image',
+                                          filetypes=(("jpeg files","*.jpg"),("all files","*.*")))
+        self.NameChoice=input('Saved under what name?\n')
+        input('Please select a directory to save things to.')
         self.DirectoryChoice=filedialog.askdirectory(
-                          initialdir = 'home/user/Desktop',
-                          title='Select Directory')
-        print('1 for LightMode (Dark Text on a light background)')
-        self.ModeSelect=input('2 for Darkmode (Light text on a dark background)\n')
+                                          initialdir = self.FilePath,
+                                          title='Select Directory')
+        self.ModeSelect=input('1 for LightMode (Dark Text on a light background) \n2 for Darkmode (Light text on a dark background)\n')
         if self.ModeSelect is '1':
             self.Characters.reverse()
-            self.ModeSelect='light'
+            self.ModeSelect='Light'
         else:
-            self.ModeSelect='dark'
+            self.ModeSelect='Dark'
         self.RawImage = Image.open(self.ImageChoice)
         self.Ratio()
 
@@ -55,27 +56,35 @@ class JpgToAscii:
         for y in range(ResizedImage.height):
             for x in range(ResizedImage.width):
              #Max750//68 = 0 through 11, the amout of Characters used.
-                Brightness = sum(ResizedImage.getpixel((x, y)))//68
-                #Because arrays
-                Brightness-=1
+                Brightness = sum(ResizedImage.getpixel((x, y)))//68-1
                 if Brightness<=0:
                     Brightness=0
                 self.Output += self.Characters[Brightness]
             self.Output += '\n'
-        if self.Imported is False:
+        if self.Imported == False:
             self.MRCFile(Ratio)
             self.Output=''
-        elif self.Imported is True:
+        elif self.Imported == True:
             self.PayloadPacker()
             self.Output=''
 
         #Make Record Close, Make the file, Record to it, Close the file.
     def MRCFile(self,Ratio):
-        openfile=open("{0}/{1}:{2}:{3}.txt".format(self.DirectoryChoice,self.NameChoice,Ratio,self.ModeSelect),"w") 
-        print(self.Output,file=openfile)
-        openfile.close()
-        print('\n\nRatio Level:{}'.format(str(Ratio)))
-        print(self.Output)
+        if sys.platform == "linux" or sys.platform == "linux2":
+            with open(f"{self.DirectoryChoice}/{self.NameChoice}_{Ratio}_{self.ModeSelect}.txt","w") as NewFile:
+                openfile=NewFile 
+                print(self.Output,file=openfile)
+                print('\n\nRatio Level:{}'.format(str(Ratio)))
+                print(self.Output)
+
+        elif sys.platform == "win32" or sys.platform == "win64":
+            with open(f"{self.DirectoryChoice}\\{self.NameChoice}_{Ratio}_{self.ModeSelect}.txt","w") as NewFile:
+                openfile=NewFile 
+                print(self.Output,file=openfile)
+                print('\n\nRatio Level:{}'.format(str(Ratio)))
+                print(self.Output)
+    
+
 
     def PayloadPacker(self):
         self.Payload.append(self.Output)
@@ -92,3 +101,4 @@ if __name__ == "__main__":
     JpgToAscii().StandAloneOptions()
 else:
     pass
+
