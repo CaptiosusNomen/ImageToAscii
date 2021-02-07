@@ -15,13 +15,15 @@ import JpgToAscii as J2A
 import tkinter as tk
 from tkinter import filedialog
 from PIL import Image
+import os
+
 
 def GetAsciiList():
     Window = tk.Tk()
     Window.withdraw()
     print('Please select a .jpg image.')
     ImageChoice= filedialog.askopenfilename(
-                        initialdir='/home/user/Desktop',
+                        initialdir=os.path.dirname(os.path.abspath(__file__)),
                         title='Select Image',
                         filetypes=(("jpeg files","*.jpg"),("all files","*.*")))
     
